@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <title>Pomodoro</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../styles/default.css">
+    <link rel="stylesheet" href="../styles/initialPopup.css">
+    <meta name="google" content="notranslate">
+</head>
+<body>
+<header>
+    <div class="logoDiv">
+        <img id="logoTomate" src="../icons/tomate36.png" width="36" height="36" alt="tomate">
+        <h1 class="logoText">POMODORO</h1>
+    </div>
+
+</header>
+
+<main>
+    <div class="camposPrincipal">
+
+
+        <div id="workForm" class="form-group form-inline">
+            <button class="decincButton" id="decrementFocos"> -</button>
+            <input type="number" min="0" step="1" placeholder="0" id="focos">
+            <button class="decincButton" id="incrementFocos"> +</button>
+            <label id="focosLabel" for="focos">FOCOS</label>
+
+        </div>
+
+        <div id="breakForm" class="form-group form-inline">
+            <button class="decincButton" id="decrementBreak"> -</button>
+            <input type="number" min="0" step="1" placeholder="0" id="break">
+            <button class="decincButton" id="incrementBreak"> +</button>
+            <label id="breakLabel" for="break">BREAK</label>
+        </div>
+        <div class="form-group form-inline">
+            <button class="startButton" type="submit">Start</button>
+        </div>
+
+
+    </div>
+</main>
+
+<footer>
+    <p>Developer by Moonpresence</p>
+</footer>
+<script src="../scripts/scriptInput.js"></script>
+<script src="../scripts/redirecionarJs.js"></script>
+</body>
+</html>
