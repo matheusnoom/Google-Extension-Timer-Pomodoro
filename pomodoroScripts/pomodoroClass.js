@@ -1,6 +1,5 @@
 //mapeamento dos botoes
-let minutes = document.querySelector("#minutesCase");
-let seconds = document.querySelector("#secondsCase");
+let timer = document.querySelector("#timer");
 let textBoxStatus = document.querySelector("#statusBox");
 
 let botao1 = document.querySelector("#play");
@@ -8,9 +7,6 @@ let botao2 = document.querySelector("#pause");
 let botao3 = document.querySelector("#reset");
 
 //get storage
-let minutesFocos;
-let minutesBreak;
-
 async function getFocosStorage() {
     return new Promise((resolve, reject) => {
         try {
@@ -36,68 +32,73 @@ async function getBreakStorage() {
 }
 
 
-minutesFocos = await getFocosStorage();
-minutesBreak = await getBreakStorage();
+//Funcao atualizar timer
+function setTimer(minutes, seconds) {
+    if (minutes < 10 && seconds < 10) {
+        timer.innerHTML = "0" + minutes + ":" + "0" + seconds;
+    } else if (minutes < 10) {
+        timer.innerHTML = "0" + minutes + ":" + seconds;
+
+    } else if (seconds < 10) {
+        timer.innerHTML = minutes + ":" + "0" + seconds;
+    } else {
+        timer.innerHTML = minutes + ":" + seconds;
+    }
+}
 
 
-//variaveis utilizadas
-let onFocus = true;
-let actualMinutes = minutesFocos;
-let actualSeconds = 3;
-
-minutes.innerText = minutesFocos;
-seconds.innerText = actualSeconds;
-
-
-let currentTimer;
-
+//Timer de focus e break
 function focosTimer() {
-    onFocus = !onFocus;
+    console.log("focus");
+    console.log(onFocus);
     clearTimeout(currentTimer);
 
     currentTimer = setInterval(() => {
         actualSeconds--;
         if (actualSeconds < 0) {
             actualMinutes--;
-            actualSeconds = 3;
+            actualSeconds = segundosTeste;
         }
         if (actualMinutes === 0 && actualSeconds === 0) {
             clearTimeout(currentTimer);
             console.log("fim");
             actualMinutes = minutesBreak;
-            actualSeconds = 3;
+            actualSeconds = segundosTeste;
             textBoxStatus.innerText = "BREAK";
+            onFocus = !onFocus;
             breakTimer()
         }
-        seconds.innerText = actualSeconds;
-        minutes.innerText = actualMinutes;
+        setTimer(actualMinutes, actualSeconds)
     }, 1000);
 }
 
 function breakTimer() {
-    onFocus = !onFocus;
+    console.log("break");
+    console.log(onFocus);
     clearTimeout(currentTimer);
     currentTimer = setInterval(() => {
         actualSeconds--;
         if (actualSeconds < 0) {
             actualMinutes--;
-            actualSeconds = 3;
+            actualSeconds = segundosTeste;
 
         }
         if (actualMinutes === 0 && actualSeconds === 0) {
             clearTimeout(currentTimer);
             console.log("fim");
             actualMinutes = minutesFocos;
-            actualSeconds = 3;
+            actualSeconds = segundosTeste;
             textBoxStatus.innerText = "FOCOS";
+            onFocus = !onFocus;
             focosTimer()
         }
-        seconds.innerText = actualSeconds;
-        minutes.innerText = actualMinutes;
+        setTimer(actualMinutes, actualSeconds)
+
     }, 1000);
 }
 
 
+//Funcao dos botoes
 function pauseTimer() {
     clearTimeout(currentTimer);
 }
@@ -105,17 +106,27 @@ function pauseTimer() {
 function resetTimer() {
     if (onFocus) {
         actualMinutes = minutesFocos;
-        minutes.innerText = minutesFocos;
-        seconds.innerText = 60;
+        setTimer(minutesFocos, segundosTeste)
     } else {
         actualMinutes = minutesBreak;
-        minutes.innerText = minutesBreak;
-        seconds.innerText = 60;
+        setTimer(minutesBreak, segundosTeste)
     }
-    actualSeconds = 3;
+    actualSeconds = segundosTeste;
 }
 
-//Chamada das funcoes
+
+//Variaveis
+var minutesFocos = await getFocosStorage();
+var minutesBreak = await getBreakStorage();
+var segundosTeste = 2;
+let currentTimer;
+let onFocus = true;
+let actualMinutes = minutesFocos;
+let actualSeconds = segundosTeste;
+
+
+//Chamada das funcoes:
+setTimer(minutesFocos, actualSeconds)
 
 focosTimer()
 botao1.addEventListener("click", () => {

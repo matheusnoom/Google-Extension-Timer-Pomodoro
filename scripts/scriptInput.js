@@ -2,12 +2,15 @@
 let focus_timer = document.querySelector("#focos");
 let break_timer = document.querySelector("#break");
 
-
 //Botoes
 const incrementFocos = document.querySelector("#incrementFocos");
 const decrementFocos = document.querySelector("#decrementFocos");
 const incrementBreak = document.querySelector("#incrementBreak")
 const decrementBreak = document.querySelector("#decrementBreak");
+
+//variaveis Mousepressed increment and decrement
+let interval;
+const timer = 140;
 
 //Increment e decrement dos valores
 incrementFocos.addEventListener("mousedown", () => {
@@ -28,10 +31,6 @@ decrementBreak.addEventListener("mousedown", () => {
         break_timer.value--;
     }
 })
-
-//Mousepressed increment and decrement
-let interval;
-const timer = 140;
 
 //increment focos
 incrementFocos.addEventListener("mousedown", () => {
