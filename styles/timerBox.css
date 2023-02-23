@@ -1,0 +1,36 @@
+
+
+.timerBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.timerBox_progress {
+    display: flex;
+    width: 200px;
+    height: 200px;
+    background: #91938E;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 65px;
+    overflow: hidden;
+}
+
+.timerBox__fill{
+    height: 200px;
+    width: 100%;
+    background: #15DA7A;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    align-self: flex-end;
+    transition: all 0.2s;
+}
+
+.timer{
+    position: absolute;
+    align-self: center;
+    font-size: 40px;
+    margin-left: 50px;
+    color: #E8EDDF;
+}

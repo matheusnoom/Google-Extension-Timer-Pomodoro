@@ -4,23 +4,28 @@
     <title>Pomodoro</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../styles/default.css">
+    <link rel="stylesheet" href="../styles/timerBox.css">
     <meta name="google" content="notranslate">
 
 </head>
 <body>
 <header>
     <div class="logoDiv">
-        <img id="testeee" src="../icons/tomate36.png" width="36" height="36" alt="tomate">
+        <img id="logoTomate" src="../icons/tomate36.png" width="36" height="36" alt="tomate">
         <h1 class="logoText">POMODORO</h1>
     </div>
 
 </header>
 <main>
-    <div>
-        <div>
-            <p id="timer"></p>
+    <div class="timerBox">
+        <div class="timerBox_progress">
+            <div class="timerBox__fill"></div>
+            <span class="timer"></span>
         </div>
     </div>
+
+
+
     <h6 id="statusBox">FOCUS</h6>
     <button id="play"> play</button>
     <button id="pause">pause</button>

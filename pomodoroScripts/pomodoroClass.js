@@ -1,10 +1,12 @@
 //mapeamento dos botoes
-let timer = document.querySelector("#timer");
+let timer = document.querySelector(".timer");
 let textBoxStatus = document.querySelector("#statusBox");
+let progressBar = document.querySelector(".timerBox__fill");
 
-let botao1 = document.querySelector("#play");
-let botao2 = document.querySelector("#pause");
-let botao3 = document.querySelector("#reset");
+let botaoPlay = document.querySelector("#play");
+let botaoPause = document.querySelector("#pause");
+let botaoReset = document.querySelector("#reset");
+
 
 //get storage
 async function getFocosStorage() {
@@ -47,14 +49,21 @@ function setTimer(minutes, seconds) {
 }
 
 
+//update progress bar
+function updateProgressBar(minutes) {
+    let onePorcent = 200 / ((minutes + 1) * 60)
+    actualPorcent -= onePorcent;
+    progressBar.style.height = `${actualPorcent}px`;
+}
+
+
 //Timer de focus e break
 function focosTimer() {
-    console.log("focus");
-    console.log(onFocus);
     clearTimeout(currentTimer);
-
     currentTimer = setInterval(() => {
+
         actualSeconds--;
+        updateProgressBar(minutesFocos)
         if (actualSeconds < 0) {
             actualMinutes--;
             actualSeconds = segundosTeste;
@@ -65,19 +74,22 @@ function focosTimer() {
             actualMinutes = minutesBreak;
             actualSeconds = segundosTeste;
             textBoxStatus.innerText = "BREAK";
+            progressBar.style.background = "#C15754";
+            progressBar.style.height = `${200}px`;
+            actualPorcent = 200;
             onFocus = !onFocus;
             breakTimer()
         }
+
         setTimer(actualMinutes, actualSeconds)
     }, 1000);
 }
 
 function breakTimer() {
-    console.log("break");
-    console.log(onFocus);
     clearTimeout(currentTimer);
     currentTimer = setInterval(() => {
         actualSeconds--;
+        updateProgressBar(minutesFocos)
         if (actualSeconds < 0) {
             actualMinutes--;
             actualSeconds = segundosTeste;
@@ -89,6 +101,9 @@ function breakTimer() {
             actualMinutes = minutesFocos;
             actualSeconds = segundosTeste;
             textBoxStatus.innerText = "FOCOS";
+            progressBar.style.background = "#15DA7A";
+            progressBar.style.height = `${200}px`;
+            actualPorcent = 200;
             onFocus = !onFocus;
             focosTimer()
         }
@@ -106,6 +121,8 @@ function pauseTimer() {
 function resetTimer() {
     if (onFocus) {
         actualMinutes = minutesFocos;
+        actualPorcent = 200;
+        progressBar.style.height = `${200}px`;
         setTimer(minutesFocos, segundosTeste)
     } else {
         actualMinutes = minutesBreak;
@@ -116,9 +133,10 @@ function resetTimer() {
 
 
 //Variaveis
-var minutesFocos = await getFocosStorage();
-var minutesBreak = await getBreakStorage();
-var segundosTeste = 2;
+var minutesFocos = await getFocosStorage() - 1;
+var minutesBreak = await getBreakStorage() - 1;
+var segundosTeste = 60;
+var actualPorcent = 200;
 let currentTimer;
 let onFocus = true;
 let actualMinutes = minutesFocos;
@@ -126,19 +144,19 @@ let actualSeconds = segundosTeste;
 
 
 //Chamada das funcoes:
-setTimer(minutesFocos, actualSeconds)
+setTimer(minutesFocos, actualSeconds);
 
-focosTimer()
-botao1.addEventListener("click", () => {
+focosTimer();
+botaoPlay.addEventListener("click", () => {
     if (onFocus) {
         focosTimer();
     } else {
         breakTimer();
     }
 });
-botao2.addEventListener("click", pauseTimer);
+botaoPause.addEventListener("click", pauseTimer);
 
-botao3.addEventListener("click", resetTimer);
+botaoReset.addEventListener("click", resetTimer);
 
 
 
