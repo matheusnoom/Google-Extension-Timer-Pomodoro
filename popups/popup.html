@@ -18,13 +18,14 @@
 
 <main>
     <div class="camposPrincipal">
-
-
         <div id="workForm" class="form-group form-inline">
             <button class="decincButton" id="decrementFocos"> -</button>
             <input type="number" min="0" step="1" placeholder="0" id="focos">
             <button class="decincButton" id="incrementFocos"> +</button>
-            <label id="focosLabel" for="focos">FOCOS</label>
+            <div class="minutesInd">
+                <label id="focosLabel" for="focos">FOCOS</label>
+                <p>minutes</p>
+            </div>
 
         </div>
 
@@ -32,16 +33,20 @@
             <button class="decincButton" id="decrementBreak"> -</button>
             <input type="number" min="0" step="1" placeholder="0" id="break">
             <button class="decincButton" id="incrementBreak"> +</button>
-            <label id="breakLabel" for="break">BREAK</label>
+            <div class="minutesInd">
+                <label id="breakLabel" for="break">BREAK</label>
+                <p>minutes</p>
+            </div>
+
+        </div>
+        <div id="errorBox" class="form-group form-inline">
+            <p hidden id="errorText">Values cannot be 0</p>
         </div>
         <div class="form-group form-inline">
             <button class="startButton" type="submit">Start</button>
         </div>
-
-
     </div>
 </main>
-
 <footer>
     <p>Developer by Moonpresence</p>
 </footer>

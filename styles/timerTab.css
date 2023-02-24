@@ -6,7 +6,7 @@
 
 
 .timerBox_progress {
-    margin: 30px 0 0 0;
+    margin: 0 0 0 0;
     display: flex;
     width: 200px;
     height: 200px;
@@ -16,7 +16,7 @@
     overflow: hidden;
 }
 
-.timerBox__fill{
+.timerBox__fill {
     height: 200px;
     width: 100%;
     background: #15DA7A;
@@ -26,43 +26,65 @@
     transition: all 0.2s;
 }
 
-.timer{
+.timer {
     position: absolute;
     align-self: center;
     font-size: 40px;
     margin-left: 50px;
     color: #E8EDDF;
 }
- .statusTimer{
-     height: 60px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     font-size: 35px;
- }
 
- #statusText{
-     color: #0e814a;
-     /*color: #C15754;*/
-     align-self: flex-end;
-     margin: 0 35px 0 35px;
- }
+.statusTimer {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    margin: 10px 0 0 0;
+}
 
- .button{
-     padding: 4px;
-     /*height: 40px;*/
-     /*width: 60px;*/
-     /*padding-bottom: 3px;*/
-     color: #FFFFFF;
-     text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-     background: #a9a6a6;
-     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-     border-radius: 15px;
-     border: none;
-     outline: none;
-     cursor: pointer;
- }
+#statusText {
+    color: #0e814a;
+    align-self: flex-end;
+    margin: 0 35px 0 35px;
+}
 
- .button:hover {
-     filter: brightness(70%);
- }
+.button {
+    padding: 4px;
+
+    color: #FFFFFF;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    background: #a9a6a6;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    filter: brightness(70%);
+}
+
+.returnPop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonReturn {
+    margin-right: 265px;
+    padding: 0 10px 0 10px;
+    color: #FFFFFF;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    background: #a9a6a6;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.buttonReturn:hover {
+    filter: brightness(70%);
+}
