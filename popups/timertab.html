@@ -4,7 +4,7 @@
     <title>Pomodoro</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../styles/default.css">
-    <link rel="stylesheet" href="../styles/timerBox.css">
+    <link rel="stylesheet" href="../styles/timerTab.css">
     <meta name="google" content="notranslate">
 
 </head>
@@ -23,18 +23,16 @@
             <span class="timer"></span>
         </div>
     </div>
-
-
-
-    <h6 id="statusBox">FOCUS</h6>
-    <button id="play"> play</button>
-    <button id="pause">pause</button>
-    <button id="reset">reset</button>
+    <div class="statusTimer">
+        <img src="../icons/buttons/pause.png" alt="playPauseButton" id="play" class="button" width="35" height="35">
+        <h6 id="statusText">FOCOS</h6>
+        <img src="../icons/buttons/reset.png" alt="resetButton" id="reset" class="button" width="35" height="35">
+    </div>
 </main>
 
 <footer>
     <p>Developer by Moonpresence</p>
 </footer>
-<script src="../pomodoroScripts/pomodoroClass.js" type="module"></script>
+<script src="../scripts/pomodoroScript/pomodoroClass.js" type="module"></script>
 </body>
 </html>

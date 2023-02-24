@@ -1,10 +1,9 @@
 //mapeamento dos botoes
 let timer = document.querySelector(".timer");
-let textBoxStatus = document.querySelector("#statusBox");
+let textBoxStatus = document.querySelector("#statusText");
 let progressBar = document.querySelector(".timerBox__fill");
 
 let botaoPlay = document.querySelector("#play");
-let botaoPause = document.querySelector("#pause");
 let botaoReset = document.querySelector("#reset");
 
 
@@ -70,14 +69,18 @@ function focosTimer() {
         }
         if (actualMinutes === 0 && actualSeconds === 0) {
             clearTimeout(currentTimer);
-            console.log("fim");
+
             actualMinutes = minutesBreak;
             actualSeconds = segundosTeste;
+
             textBoxStatus.innerText = "BREAK";
+            textBoxStatus.style.color = "#a94e4d";
             progressBar.style.background = "#C15754";
             progressBar.style.height = `${200}px`;
+
             actualPorcent = 200;
             onFocus = !onFocus;
+
             breakTimer()
         }
 
@@ -97,14 +100,18 @@ function breakTimer() {
         }
         if (actualMinutes === 0 && actualSeconds === 0) {
             clearTimeout(currentTimer);
-            console.log("fim");
+
             actualMinutes = minutesFocos;
             actualSeconds = segundosTeste;
+
+            textBoxStatus.style.color = "#0e814a";
             textBoxStatus.innerText = "FOCOS";
             progressBar.style.background = "#15DA7A";
             progressBar.style.height = `${200}px`;
+
             actualPorcent = 200;
             onFocus = !onFocus;
+
             focosTimer()
         }
         setTimer(actualMinutes, actualSeconds)
@@ -119,10 +126,10 @@ function pauseTimer() {
 }
 
 function resetTimer() {
+    actualPorcent = 200;
+    progressBar.style.height = `${200}px`;
     if (onFocus) {
         actualMinutes = minutesFocos;
-        actualPorcent = 200;
-        progressBar.style.height = `${200}px`;
         setTimer(minutesFocos, segundosTeste)
     } else {
         actualMinutes = minutesBreak;
@@ -139,6 +146,7 @@ var segundosTeste = 60;
 var actualPorcent = 200;
 let currentTimer;
 let onFocus = true;
+let playStatus = true;
 let actualMinutes = minutesFocos;
 let actualSeconds = segundosTeste;
 
@@ -148,13 +156,20 @@ setTimer(minutesFocos, actualSeconds);
 
 focosTimer();
 botaoPlay.addEventListener("click", () => {
-    if (onFocus) {
-        focosTimer();
+    if (playStatus === true) {
+        pauseTimer()
+        botaoPlay.src = "../../icons/buttons/play.png";
+        playStatus = !playStatus;
     } else {
-        breakTimer();
+        playStatus = true;
+        botaoPlay.src = "../../icons/buttons/pause.png";
+        if (onFocus) {
+            focosTimer();
+        } else {
+            breakTimer();
+        }
     }
 });
-botaoPause.addEventListener("click", pauseTimer);
 
 botaoReset.addEventListener("click", resetTimer);
 
