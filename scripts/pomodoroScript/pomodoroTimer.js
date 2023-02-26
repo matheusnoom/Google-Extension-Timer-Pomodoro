@@ -33,6 +33,13 @@ async function getBreakStorage() {
 }
 
 
+//Alert
+function soundAlert(){
+    const audio = new Audio("../../audios/bellAlert.mp3");
+    audio.play();
+    audio.volume = 0.2;
+}
+
 //Funcao atualizar timer
 function setTimer(minutes, seconds) {
     if (minutes < 10 && seconds < 10) {
@@ -65,22 +72,23 @@ function focosTimer() {
         updateProgressBar(minutesFocos)
         if (actualSeconds < 0) {
             actualMinutes--;
-            actualSeconds = segundosTeste;
+            actualSeconds = seconds;
         }
         if (actualMinutes === 0 && actualSeconds === 0) {
             clearTimeout(currentTimer);
 
             actualMinutes = minutesBreak;
-            actualSeconds = segundosTeste;
+            actualSeconds = seconds;
 
             textBoxStatus.innerText = "BREAK";
-            textBoxStatus.style.color = "#a94e4d";
-            progressBar.style.background = "#C15754";
+            textBoxStatus.style.color = "#0e814a";
+            progressBar.style.background = "#15DA7A";
+
             progressBar.style.height = `${200}px`;
 
             actualPorcent = 200;
             onFocus = !onFocus;
-
+            soundAlert();
             breakTimer()
         }
 
@@ -95,23 +103,22 @@ function breakTimer() {
         updateProgressBar(minutesFocos)
         if (actualSeconds < 0) {
             actualMinutes--;
-            actualSeconds = segundosTeste;
+            actualSeconds = seconds;
 
         }
         if (actualMinutes === 0 && actualSeconds === 0) {
             clearTimeout(currentTimer);
 
             actualMinutes = minutesFocos;
-            actualSeconds = segundosTeste;
-
-            textBoxStatus.style.color = "#0e814a";
-            textBoxStatus.innerText = "FOCOS";
-            progressBar.style.background = "#15DA7A";
+            actualSeconds = seconds;
+            textBoxStatus.innerText = "FOCUS";
+            textBoxStatus.style.color = "#a94e4d";
+            progressBar.style.background = "#C15754";
             progressBar.style.height = `${200}px`;
 
             actualPorcent = 200;
             onFocus = !onFocus;
-
+            soundAlert();
             focosTimer()
         }
         setTimer(actualMinutes, actualSeconds)
@@ -130,25 +137,25 @@ function resetTimer() {
     progressBar.style.height = `${200}px`;
     if (onFocus) {
         actualMinutes = minutesFocos;
-        setTimer(minutesFocos, segundosTeste)
+        setTimer(minutesFocos, seconds)
     } else {
         actualMinutes = minutesBreak;
-        setTimer(minutesBreak, segundosTeste)
+        setTimer(minutesBreak, seconds)
     }
-    actualSeconds = segundosTeste;
+    actualSeconds = seconds;
 }
 
 
 //Variaveis
 var minutesFocos = await getFocosStorage() - 1;
 var minutesBreak = await getBreakStorage() - 1;
-var segundosTeste = 60;
+var seconds = 59;
 var actualPorcent = 200;
 let currentTimer;
 let onFocus = true;
 let playStatus = true;
 let actualMinutes = minutesFocos;
-let actualSeconds = segundosTeste;
+let actualSeconds = seconds;
 
 
 //Chamada das funcoes:

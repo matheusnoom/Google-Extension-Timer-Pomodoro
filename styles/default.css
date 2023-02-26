@@ -37,9 +37,18 @@ body {
     background: rgba(232, 237, 223, 0.9);
 }
 
-footer {
-    text-align: center;
-    margin-top: auto;
+footer div{
+    margin-top: 19px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+footer a{
+    margin: 0;
+    align-self: center;
+    color: black;
+    text-decoration: none;
 }
 
 #logoText {

@@ -33,11 +33,12 @@ input {
 }
 
 #focos {
-    background: #15DA7A;
+
+    background: #C15754;
 }
 
 #break {
-    background: #C15754;
+    background: #15DA7A;
 }
 
 .decincButton {
@@ -84,18 +85,15 @@ label {
     text-align: center;
     letter-spacing: 0.25em;
     margin-left: 13px;
-
-    color: #15DA7A;
-
     text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 #focosLabel {
-    color: #15DA7A;
+    color: #C15754;
 }
 
 #breakLabel {
-    color: #C15754;
+    color: #15DA7A;
 }
 
 #breakForm {
