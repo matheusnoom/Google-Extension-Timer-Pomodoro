@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "My Extension",
+  "name": "Simple Pomodoro",
   "version": "3",
-  "description": "A plain text description",
+  "description": "A simple pomodoro timer, to track your study or work times.",
   "permissions": [
     "tabs",
     "storage"
