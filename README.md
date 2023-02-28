@@ -1,4 +1,5 @@
-
+Link to Chrome Web Store: [Simple Pomodoro](https://chrome.google.com/webstore/detail/simple-pomodoro/obdmgpkhbbglmbcoiljmafgjglejkaal/)
+---
 <p align="center">
   <img src="https://user-images.githubusercontent.com/61883739/221387800-b5a4a7d2-da0e-4c27-98a7-111a51ca0868.png" />
 </p>
