@@ -1,44 +1,14 @@
+import * as storage from './getStorageMinutes.js'
+import soundAlert from './soundAlert.js';
+
+
 //mapeamento dos botoes
 let timer = document.querySelector(".timer");
 let textBoxStatus = document.querySelector("#statusText");
 let progressBar = document.querySelector(".timerBox__fill");
-
 let botaoPlay = document.querySelector("#play");
 let botaoReset = document.querySelector("#reset");
 
-
-//get storage
-async function getFocosStorage() {
-    return new Promise((resolve, reject) => {
-        try {
-            chrome.storage.local.get(minutesFocos, function (value) {
-                resolve(value.minutesFocos);
-            })
-        } catch (e) {
-            reject(e);
-        }
-    });
-}
-
-async function getBreakStorage() {
-    return new Promise((resolve, reject) => {
-        try {
-            chrome.storage.local.get(minutesBreak, function (value) {
-                resolve(value.minutesFocos);
-            })
-        } catch (e) {
-            reject(e);
-        }
-    });
-}
-
-
-//Alert
-function soundAlert(){
-    const audio = new Audio("../../audios/bellAlert.mp3");
-    audio.play();
-    audio.volume = 0.2;
-}
 
 //Funcao atualizar timer
 function setTimer(minutes, seconds) {
@@ -62,10 +32,23 @@ function updateProgressBar(minutes) {
     progressBar.style.height = `${actualPorcent}px`;
 }
 
+async function teste(){
+    chrome.alarms.clearAll();
+    chrome.alarms.create("myAlarm", {when: Date.now() + 5000});
+}
 
 //Timer de focus e break
-function focosTimer() {
+async function focosTimer() {
+    console.log(minutesBreak);
+    console.log(minutesFocos);
+    await teste()
+
+    textBoxStatus.innerText = "FOCUS";
+    textBoxStatus.style.color = "#a94e4d";
+    progressBar.style.background = "#C15754";
+
     clearTimeout(currentTimer);
+
     currentTimer = setInterval(() => {
 
         actualSeconds--;
@@ -80,10 +63,6 @@ function focosTimer() {
             actualMinutes = minutesBreak;
             actualSeconds = seconds;
 
-            textBoxStatus.innerText = "BREAK";
-            textBoxStatus.style.color = "#0e814a";
-            progressBar.style.background = "#15DA7A";
-
             progressBar.style.height = `${200}px`;
 
             actualPorcent = 200;
@@ -96,8 +75,13 @@ function focosTimer() {
     }, 1000);
 }
 
-function breakTimer() {
+async function breakTimer() {
+    textBoxStatus.innerText = "BREAK";
+    textBoxStatus.style.color = "#0e814a";
+    progressBar.style.background = "#15DA7A";
+
     clearTimeout(currentTimer);
+
     currentTimer = setInterval(() => {
         actualSeconds--;
         updateProgressBar(minutesFocos)
@@ -111,9 +95,7 @@ function breakTimer() {
 
             actualMinutes = minutesFocos;
             actualSeconds = seconds;
-            textBoxStatus.innerText = "FOCUS";
-            textBoxStatus.style.color = "#a94e4d";
-            progressBar.style.background = "#C15754";
+
             progressBar.style.height = `${200}px`;
 
             actualPorcent = 200;
@@ -147,9 +129,9 @@ function resetTimer() {
 
 
 //Variaveis
-var minutesFocos = await getFocosStorage() - 1;
-var minutesBreak = await getBreakStorage() - 1;
-var seconds = 59;
+var minutesFocos = await storage.getFocosStorage() - 1;
+var minutesBreak = await storage.getBreakStorage() - 1;
+var seconds = 4;
 var actualPorcent = 200;
 let currentTimer;
 let onFocus = true;
@@ -160,8 +142,9 @@ let actualSeconds = seconds;
 
 //Chamada das funcoes:
 setTimer(minutesFocos, actualSeconds);
-
 focosTimer();
+
+//Botoes
 botaoPlay.addEventListener("click", () => {
     if (playStatus === true) {
         pauseTimer()

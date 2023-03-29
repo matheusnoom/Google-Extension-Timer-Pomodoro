@@ -4,7 +4,8 @@
   "version": "3",
   "description": "A simple pomodoro timer, to track your study or work times.",
   "permissions": [
-    "storage"
+    "storage",
+    "alarms"
   ],
   "action": {
   },
