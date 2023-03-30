@@ -131,7 +131,7 @@ async function resetTimer() {
 //Variaveis
 var minutesFocus = await storage.getFocosStorage() - 1;
 var minutesBreak = await storage.getBreakStorage() - 1;
-var seconds = 60;
+var seconds = 59;
 var actualPorcent = 200;
 let currentTimer;
 let onFocus = true;
