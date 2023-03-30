@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Simple Pomodoro",
-  "version": "3",
+  "version": "1.1",
   "description": "A simple pomodoro timer, to track your study or work times.",
   "permissions": [
     "storage",

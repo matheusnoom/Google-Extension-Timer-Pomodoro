@@ -1,5 +1,6 @@
 import * as storage from './getStorageMinutes.js'
-import soundAlert from './soundAlert.js';
+import soundAlert from './soundAlert.js'
+import createTimer from './chromeTimer.js'
 
 
 //mapeamento dos botoes
@@ -32,16 +33,10 @@ function updateProgressBar(minutes) {
     progressBar.style.height = `${actualPorcent}px`;
 }
 
-async function teste(){
-    chrome.alarms.clearAll();
-    chrome.alarms.create("myAlarm", {when: Date.now() + 5000});
-}
 
 //Timer de focus e break
 async function focosTimer() {
-    console.log(minutesBreak);
-    console.log(minutesFocos);
-    await teste()
+    await createTimer(actualMinutes,actualSeconds)
 
     textBoxStatus.innerText = "FOCUS";
     textBoxStatus.style.color = "#a94e4d";
@@ -52,7 +47,7 @@ async function focosTimer() {
     currentTimer = setInterval(() => {
 
         actualSeconds--;
-        updateProgressBar(minutesFocos)
+        updateProgressBar(minutesFocus)
         if (actualSeconds < 0) {
             actualMinutes--;
             actualSeconds = seconds;
@@ -76,6 +71,8 @@ async function focosTimer() {
 }
 
 async function breakTimer() {
+    await createTimer(actualMinutes,actualSeconds)
+
     textBoxStatus.innerText = "BREAK";
     textBoxStatus.style.color = "#0e814a";
     progressBar.style.background = "#15DA7A";
@@ -84,7 +81,7 @@ async function breakTimer() {
 
     currentTimer = setInterval(() => {
         actualSeconds--;
-        updateProgressBar(minutesFocos)
+        updateProgressBar(minutesFocus)
         if (actualSeconds < 0) {
             actualMinutes--;
             actualSeconds = seconds;
@@ -93,7 +90,7 @@ async function breakTimer() {
         if (actualMinutes === 0 && actualSeconds === 0) {
             clearTimeout(currentTimer);
 
-            actualMinutes = minutesFocos;
+            actualMinutes = minutesFocus;
             actualSeconds = seconds;
 
             progressBar.style.height = `${200}px`;
@@ -112,36 +109,39 @@ async function breakTimer() {
 //Funcao dos botoes
 function pauseTimer() {
     clearTimeout(currentTimer);
+    chrome.alarms.clearAll();
 }
 
-function resetTimer() {
+async function resetTimer() {
     actualPorcent = 200;
     progressBar.style.height = `${200}px`;
     if (onFocus) {
-        actualMinutes = minutesFocos;
-        setTimer(minutesFocos, seconds)
+        actualMinutes = minutesFocus;
+        setTimer(minutesFocus, seconds)
+        await createTimer(actualMinutes,seconds)
     } else {
         actualMinutes = minutesBreak;
         setTimer(minutesBreak, seconds)
+        await createTimer(actualMinutes,seconds)
     }
     actualSeconds = seconds;
 }
 
 
 //Variaveis
-var minutesFocos = await storage.getFocosStorage() - 1;
+var minutesFocus = await storage.getFocosStorage() - 1;
 var minutesBreak = await storage.getBreakStorage() - 1;
-var seconds = 4;
+var seconds = 60;
 var actualPorcent = 200;
 let currentTimer;
 let onFocus = true;
 let playStatus = true;
-let actualMinutes = minutesFocos;
+let actualMinutes = minutesFocus;
 let actualSeconds = seconds;
 
 
 //Chamada das funcoes:
-setTimer(minutesFocos, actualSeconds);
+setTimer(minutesFocus, actualSeconds);
 focosTimer();
 
 //Botoes
