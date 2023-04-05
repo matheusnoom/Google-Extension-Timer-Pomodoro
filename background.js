@@ -11,11 +11,11 @@ chrome.action.onClicked.addListener((tab) => {
 
 
 chrome.alarms.onAlarm.addListener(async function(alarm) {
-    let teste
+    let windowId
     await chrome.storage.session.get(['winId']).then((result) => {
-        teste = result.winId;
+        windowId = result.winId;
     });
-    chrome.windows.update(teste, {focused: true});
+    chrome.windows.update(windowId, {focused: true});
 });
 
 
