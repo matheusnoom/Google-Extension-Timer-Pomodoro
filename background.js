@@ -1,4 +1,5 @@
 chrome.action.onClicked.addListener((tab) => {
+    chrome.alarms.clearAll();
     chrome.windows.create({
         url: chrome.runtime.getURL("/popups/popup.html"),
         type: "popup",
